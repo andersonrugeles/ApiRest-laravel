@@ -9,7 +9,7 @@ class PersonController extends Controller
 {
     public function index(){
         try {
-            $persons=Person::all();
+            $persons=Person::with(['nivel_educativos:id,nivel','tipo_documentos:id,tipo','profesions:id,nombre'])->paginate(20);
             return response()->json(['persons'=>$persons],200);
         } catch (\Throwable $th) {
             return response()->json(['error'=>$th->getMessage()]);
